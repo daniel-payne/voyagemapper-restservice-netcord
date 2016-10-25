@@ -1,0 +1,9 @@
+.vscode/
+bin/
+runCloud.bat
+obj/
+runRest.bat
+Properties/
+project.lock.json
+WebApplication.xproj.user
+WebApplication.xproj
