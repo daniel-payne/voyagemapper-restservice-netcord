@@ -45,7 +45,7 @@ namespace WebApplication5.Controllers
     public String GetUncuratedDocuments()
     {
 
-      dataService.initilizeSQLCommand("Risk.GetDocumentsUncurated");
+      dataService.initilizeSQLCommand("Risk.ListDocumentsForUncurated");
 
       //dataService.setupSQLCommand("CoverageFormat", SqlDbType.VarChar, 20, "GOOGLEARRAY");
 
@@ -57,7 +57,7 @@ namespace WebApplication5.Controllers
     public String GetDocumentFacts(Int32 DocumentID)
     {
 
-      dataService.initilizeSQLCommand("Risk.GetFacts");
+      dataService.initilizeSQLCommand("Risk.ListFactsForDocument");
 
       dataService.setupSQLCommand("DocumentID",     SqlDbType.Int,     null,  DocumentID  );
       dataService.setupSQLCommand("CoverageFormat", SqlDbType.VarChar,   20, "GOOGLEARRAY");
