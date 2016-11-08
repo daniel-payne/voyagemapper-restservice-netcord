@@ -7,3 +7,4 @@ Properties/
 project.lock.json
 WebApplication.xproj.user
 WebApplication.xproj
+.vs/

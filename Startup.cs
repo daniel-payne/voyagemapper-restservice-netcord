@@ -61,6 +61,8 @@ namespace WebApplication5
       app.Use(async (httpContext, next) =>
       {
         httpContext.Response.Headers.Add("X-Frame-Options", "DENY");
+        httpContext.Response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0");
+        httpContext.Response.Headers.Add("Expires", "-1");
         await next();
       });
 

@@ -131,6 +131,17 @@ namespace WebApplication5.Services
         {
           builder.Append(" \"" + FieldName + "\": " + data.ToString() + ", ");
         }
+        else if ((FieldData is Boolean))
+        {
+          if ( FieldData as Boolean? == true)
+          {
+            builder.Append(" \"" + FieldName + "\": true, ");
+          }
+          else if (FieldData as Boolean? == false)
+          {
+            builder.Append(" \"" + FieldName + "\": false, ");
+          }
+        }
         else
         {
           builder.Append(" \"" + FieldName + "\": \"" + data.ToString() + "\", ");

@@ -66,13 +66,39 @@ namespace WebApplication5.Controllers
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
+    public class DocumentUpdateJSON
+    {
+      public Boolean reset { get; set; }
+    }
+    // TEST /risk/facts/4828?FactCategory=DISCARDED
+    [HttpPut("documents/{DocumentID}")]
+    public String PutDocument(Int32 DocumentID, [FromBody] DocumentUpdateJSON Update)
+    {
+
+      if (Update.reset == true)
+      {
+
+        dataService.initilizeSQLCommand("Risk.PutDocumentReset");
+
+        dataService.setupSQLCommand("DocumentID", SqlDbType.Int, null, DocumentID);
+
+        return dataService.processSQLCommand();
+
+      }
+
+      return null;
+
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // TEST /risk/facts/4828?FactCategory=DISCARDED
     public class FactUpdateJSON
     {
       public String  category { get; set; }
       public Boolean isMerged { get; set; }
-      public String  text     { get; set; }
+      public Boolean isDiscarded { get; set; }
+      public String  text { get; set; }
     }
-    // TEST /risk/facts/4828?FactCategory=DISCARDED
     [HttpPut("facts/{FactID}")]
     public String PutFactCategory(Int32 FactID, [FromBody] FactUpdateJSON Update)
     {
@@ -84,6 +110,17 @@ namespace WebApplication5.Controllers
 
         dataService.setupSQLCommand("FactID",             SqlDbType.Int,     null,  FactID         );
         dataService.setupSQLCommand("Category",           SqlDbType.VarChar,  255,  Update.category);
+
+        return dataService.processSQLCommand();
+
+      }
+      else if (Update.isDiscarded == true)
+      {
+
+        dataService.initilizeSQLCommand("Risk.PutFactDiscard");
+
+        dataService.setupSQLCommand("FactID",        SqlDbType.Int, null, FactID);
+        dataService.setupSQLCommand("IsDiscarded",   SqlDbType.Bit, null, Update.isDiscarded);
 
         return dataService.processSQLCommand();
 
